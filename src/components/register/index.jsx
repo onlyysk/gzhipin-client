@@ -1,11 +1,16 @@
 import React, {Component} from 'react';
-import {NavBar, WingBlank, List, InputItem, Switch, Stepper, Range, Button,  WhiteSpace, Radio} from 'antd-mobile'
+import {NavBar, WingBlank, List, InputItem, Button,  WhiteSpace, Radio} from 'antd-mobile';
+import PropTypes from 'prop-types'
 
 import Logo from '../logo'
 
 const Item = List.Item;
 
 class Register extends Component {
+  static propType = {
+    user:PropTypes.object.isRequired,
+    register:PropTypes.func.isRequired
+  }
   state = {
     username:'',
     password:'',
@@ -19,9 +24,9 @@ class Register extends Component {
     })
   }
   
-  register = () => {
+  register = async () => {
     const {username, password, rePassword, type} = this.state;
-    console.log({username, password, rePassword, type})
+    this.props.register({username, password, rePassword, type})
   }
   
   goLogin = () => {

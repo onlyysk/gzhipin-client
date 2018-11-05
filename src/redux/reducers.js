@@ -3,23 +3,25 @@
  */
 
 import {combineReducers} from 'redux'
-const xxxState = 123
-function xxx (preState = xxxState, action) {
+import {AUTH_SUCCESS, ERR_MSG} from './action-types';
+
+const initUserState = {
+  username:'',
+  type:'',
+  msg:''
+}
+function user (preState = initUserState, action) {
   switch (action.type){
-    default:
-      return preState
+    case AUTH_SUCCESS :
+      return {username:action.data.username, type:action.data.type, msg:''}
+    case ERR_MSG :
+      return {...preState, msg:action.data}
+    default :
+      return preState;
   }
 }
 
-const yyyState = [{}]
-function yyy (preState = yyyState, action) {
-  switch (action.type){
-    default:
-      return preState
-  }
-}
 
 export default combineReducers ({
-  xxx,
-  yyy
+  user
 })
